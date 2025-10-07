@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://ejemplo.com/salud/cdm"
+           xmlns:tns="http://ejemplo.com/salud/cdm"
+           elementFormDefault="qualified">
+
+    <!-- Elemento raíz -->
+    <xs:element name="Paciente" type="tns:TipoPaciente"/>
+
+    <!-- Definición del tipo Paciente -->
+    <xs:complexType name="TipoPaciente">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="fechaNacimiento" type="xs:date" minOccurs="0"/>
+            <xs:element name="historial" type="tns:TipoHistorial" minOccurs="0"/>
+            <xs:element name="resultadosLaboratorio" type="tns:TipoResultadosLaboratorio" minOccurs="0"/>
+            <xs:element name="citas" type="tns:TipoCitas" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Historial clínico -->
+    <xs:complexType name="TipoHistorial">
+        <xs:sequence>
+            <xs:element name="entrada" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Resultados de laboratorio -->
+    <xs:complexType name="TipoResultadosLaboratorio">
+        <xs:sequence>
+            <xs:element name="resultado" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Citas médicas -->
+    <xs:complexType name="TipoCitas">
+        <xs:sequence>
+            <xs:element name="cita" type="tns:CitaType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CitaType">
+        <xs:sequence>
+            <xs:element name="fecha" type="xs:string"/>
+            <xs:element name="descripcion" type="xs:string"/>
+            <xs:element name="medico" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
